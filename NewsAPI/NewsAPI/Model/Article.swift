@@ -7,5 +7,8 @@
 //
 
 class Article{
-    
+    var title: String?
+    var detail: String?
+    var url: String?
+    var urlToImage: String?
 }

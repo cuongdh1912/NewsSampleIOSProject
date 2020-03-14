@@ -7,14 +7,12 @@
 //
 
 import UIKit
-
-class HeadlineViewController: UIViewController {
-
+class HeadlineViewController: NewsViewController {
+    var headlineViewModel: HeadlineViewModel? // ViewModel
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        headlineViewModel = HeadlineViewModel(delegate: self)
+        // call api request to get headlines
+        headlineViewModel?.queryToGetHeadLines()
     }
-
-
 }
-
