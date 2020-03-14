@@ -6,7 +6,8 @@
 //  Copyright © 2020 Cuong Do Hung. All rights reserved.
 //
 /* Call API requests to get news
-    -Use RxAlamofire framwork*/
+    -Use RxAlamofire framwork
+ */
 import Foundation
 import RxSwift
 import RxAlamofire

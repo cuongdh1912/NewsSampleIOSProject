@@ -6,7 +6,7 @@
 //  Copyright © 2020 Cuong Do Hung. All rights reserved.
 //
 import Foundation
-class HeadlineViewModel: NewsViewModel {
+class HeadlineViewModel: NewsViewModel {    
     func queryToGetHeadLines() {
         // query api request in other thread
         DispatchQueue.global(qos: .utility).async {

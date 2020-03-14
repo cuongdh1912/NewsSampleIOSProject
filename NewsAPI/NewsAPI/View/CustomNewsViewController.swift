@@ -8,13 +8,12 @@
 
 import UIKit
 
-class CustomNewsViewController: UIViewController {
-
+class CustomNewsViewController: NewsViewController {
+    let ReusedCellId = "ReusedCellIdCustomNews"
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        reusedTableViewCellId = ReusedCellId
     }
-
 
 }
 
