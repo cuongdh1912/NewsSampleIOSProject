@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  HeadlineViewController.swift
 //  NewsAPI
 //
 //  Created by Cuong Do Hung on 3/14/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class HeadlineViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

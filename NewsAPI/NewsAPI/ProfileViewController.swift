@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  ProfileViewController.swift
 //  NewsAPI
 //
 //  Created by Cuong Do Hung on 3/14/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,4 +17,3 @@ class FirstViewController: UIViewController {
 
 
 }
-
