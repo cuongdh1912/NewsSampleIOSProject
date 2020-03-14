@@ -10,10 +10,21 @@ import UIKit
 class NewsViewController: UIViewController {
     @IBOutlet var tableView: UITableView?
     var newsModelView: NewsViewModel?
-    var reusedTableViewCellId: String?
+    var reusedTableViewCellId = "ReusedCellId"
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // add pull refresh to table view
+        configureRefreshControl()
+    }
+    func configureRefreshControl () {
+       // Add the refresh control to your UIScrollView object.
+       tableView?.refreshControl = UIRefreshControl()
+       tableView?.refreshControl?.addTarget(self, action:
+                                          #selector(handleRefreshControl),
+                                          for: .valueChanged)
+    }
+    @objc func handleRefreshControl() {
+       
     }
 }
 // implement NewsAPIRequestDelegate method to reload tableview
@@ -43,7 +54,10 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let article = newsModelView?.articles?[indexPath.row] {
-            
+            if let detailVC = RouteManager.getViewControllerWithId(ViewControllerIds.detailVC) as? DetailViewController {
+                detailVC.article = article
+                self.navigationController?.pushViewController(detailVC, animated: true)
+            }
         }
     }
     

@@ -16,4 +16,5 @@ class NewsViewModel {
     init(delegate: NewsAPIRequestDelegate){
         newsAPIRequestdelegate = delegate        
     }
+    
 }

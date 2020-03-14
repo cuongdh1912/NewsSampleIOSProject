@@ -7,7 +7,7 @@
 //
 import Foundation
 class HeadlineViewModel: NewsViewModel {    
-    func queryToGetHeadLines() {
+    func queryToGetHeadLines() {        
         // query api request in other thread
         DispatchQueue.global(qos: .utility).async {
             NewsAPIRequest.shared.getHeadlines()

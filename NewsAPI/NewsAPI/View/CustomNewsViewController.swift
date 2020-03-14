@@ -9,11 +9,21 @@
 import UIKit
 
 class CustomNewsViewController: NewsViewController {
-    let ReusedCellId = "ReusedCellIdCustomNews"
+    var customNewsViewModel: CustomNewsViewModel? // ViewModel
     override func viewDidLoad() {
         super.viewDidLoad()
-        reusedTableViewCellId = ReusedCellId
+        customNewsViewModel = CustomNewsViewModel(delegate: self)
+        newsModelView = customNewsViewModel
+        // call api request to get headlines
+        customNewsViewModel?.queryToGetCustomNews()
     }
-
+    // handle refresh control event
+    @objc override func handleRefreshControl() {
+        customNewsViewModel?.queryToGetCustomNews()
+        // Dismiss the refresh control.
+        DispatchQueue.main.async {[unowned self] in
+            self.tableView?.refreshControl?.endRefreshing()
+        }
+    }
 }
 
