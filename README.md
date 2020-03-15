@@ -1,6 +1,6 @@
 # newsapi
 An iOS app which shows news according to APIs in https://newsapi.org
-- Headline screen: shows all headline news of us in bussiness
+- Headline screen: shows all bussiness headline news in US.
 - News screen: shows news an area: bitcoin, apple, earthquake, animal.
 - Profile screen: user registers his information.
 
