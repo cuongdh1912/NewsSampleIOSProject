@@ -26,10 +26,13 @@ class NewsAPIRequest{
         return getNews(urlString: urlString, parameters: parameters)
     }
     // get news when user select a preference: bitcoin, apple, earthquake, animal
-    func getNewsWithKeyword(keyWord: String, from: String)  -> Observable<[Article]> {
+    func getNewsWithKeyword(keyWord: String)  -> Observable<[Article]> {
         let urlString: String = URLQueryData.rootURL + URLQueryData.customExtension
         // generate dictionary of parameters & values
-        let parameters = [NewsWithKeywordParameters.keyWord: keyWord, NewsWithKeywordParameters.from: from, NewsWithKeywordParameters.sortBy: NewsWithKeywordValues.sortBy, HeadLineParameters.apiKey: HeadLineValues.apiKey]
+        var parameters = [NewsWithKeywordParameters.keyWord: keyWord, NewsWithKeywordParameters.sortBy: NewsWithKeywordValues.sortBy, HeadLineParameters.apiKey: HeadLineValues.apiKey]
+        if let from = getLast7Date() {
+            parameters[NewsWithKeywordParameters.from] = from
+        }
         return getNews(urlString: urlString, parameters: parameters)
     }
     // query api to get all news with urlString & parameters
@@ -70,5 +73,19 @@ class NewsAPIRequest{
                 .disposed(by: self.disposeBag)
             return Disposables.create()
         }
+    }
+    func getLast7Date() -> String? {
+        var dateComponents = DateComponents()
+        dateComponents.setValue(-7, for: .day) // -7 day
+        
+        let now = Date() // Current date
+        let date = Calendar.current.date(byAdding: dateComponents, to: now) // Add the DateComponents
+        // convert date to string
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = date {
+            return dateFormatter.string(from: date)
+        }
+        return nil
     }
 }

@@ -15,4 +15,10 @@ class RouteManager{
     static func getViewControllerWithId(_ viewControllerId: String) -> UIViewController?{
         return UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: viewControllerId)
     }
+    static func showAlert(message: String?, parrent: UIViewController) {
+        // show error alert
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: AlertText.okText, style: .cancel, handler: nil))
+        parrent.present(alert, animated: true)
+    }
 }

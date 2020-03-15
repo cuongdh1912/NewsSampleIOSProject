@@ -10,7 +10,7 @@
 
 import RxSwift
 class NewsViewModel {
-    var newsAPIRequestdelegate: NewsAPIRequestDelegate?
+    weak var newsAPIRequestdelegate: NewsAPIRequestDelegate?
     let disposeBag = DisposeBag() // hold RxSwift threads
     var articles: [Article]?    
     init(delegate: NewsAPIRequestDelegate){

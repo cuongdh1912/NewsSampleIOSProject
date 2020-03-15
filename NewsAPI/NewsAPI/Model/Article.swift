@@ -9,6 +9,9 @@
 class Article{
     var title: String?
     var detail: String?
+    var content: String?
+    var author: String?
+    var publishedAt: String?
     var url: String?
     var urlToImage: String?
 }

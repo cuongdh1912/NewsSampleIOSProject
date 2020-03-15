@@ -8,11 +8,11 @@
 
 import UIKit
 class NewsViewController: UIViewController {
-    @IBOutlet var tableView: UITableView?
+    @IBOutlet weak var tableView: UITableView?
     var newsModelView: NewsViewModel?
     var reusedTableViewCellId = "ReusedCellId"
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         // add pull refresh to table view
         configureRefreshControl()
     }
@@ -35,9 +35,7 @@ extension NewsViewController: NewsAPIRequestDelegate {
     }
     func newsAPIRequestFailed(error: NSError) {
         // show error alert
-        let alert = UIAlertController(title: AlertText.APIQueryFailedTitle, message: error.description, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: AlertText.okText, style: .cancel, handler: nil))
-        self.present(alert, animated: true)
+        RouteManager.showAlert(message: error.description, parrent: self)
     }
 }
 // implement tableview delegate, datasource
@@ -46,7 +44,7 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         return newsModelView?.articles?.count ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: reusedTableViewCellId ?? "") as? NewsCell, let article = newsModelView?.articles?[indexPath.row]{
+        if let cell = tableView.dequeueReusableCell(withIdentifier: reusedTableViewCellId ) as? NewsCell, let article = newsModelView?.articles?[indexPath.row]{
             cell.update(article: article)
             return cell
         }

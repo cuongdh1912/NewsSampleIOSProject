@@ -7,7 +7,7 @@
 //
 
 import Foundation
-protocol NewsAPIRequestDelegate {
+protocol NewsAPIRequestDelegate: class {
     func newsAPIRequestSuccess()
     func newsAPIRequestFailed(error: NSError)
 }

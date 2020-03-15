@@ -7,12 +7,11 @@
 //
 import Foundation
 class CustomNewsViewModel: NewsViewModel {
-    var keyword = "bitcoin"
-    func queryToGetCustomNews() {
+    func queryToGetCustomNews(keyword: String?) {
+        guard let keyword = keyword else { return}
         // query api request in other thread
-        DispatchQueue.global(qos: .utility).async {[unowned self] in
-            let from = "2020-02-14"
-            NewsAPIRequest.shared.getNewsWithKeyword(keyWord: self.keyword, from: from)
+        DispatchQueue.global(qos: .utility).async {[unowned self] in            
+            NewsAPIRequest.shared.getNewsWithKeyword(keyWord: keyword)
                 .subscribe({[weak self] event in
                     switch event {
                     case .next(let list): // if success

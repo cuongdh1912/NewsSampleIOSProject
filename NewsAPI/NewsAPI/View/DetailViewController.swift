@@ -10,10 +10,13 @@
 import UIKit
 import Kingfisher
 class DetailViewController: UIViewController {
-    @IBOutlet var titleLabel: UILabel?
-    @IBOutlet var detailLabel: UILabel?
-    @IBOutlet var imageView: UIImageView?
-    @IBOutlet var imageHeightConstrant: NSLayoutConstraint? // use to adjust the height of image so that it matches its ratio
+    @IBOutlet weak var titleLabel: UILabel?
+    @IBOutlet weak var detailLabel: UILabel?
+    @IBOutlet weak var contentLabel: UILabel?
+    @IBOutlet weak var publishedDate: UILabel?
+    @IBOutlet weak var authorLabel: UILabel?
+    @IBOutlet weak var imageView: UIImageView?
+    @IBOutlet weak var imageHeightConstrant: NSLayoutConstraint? // use to adjust the height of image so that it matches its ratio
     
     var article: Article?
     override func viewDidLoad() {
@@ -23,6 +26,13 @@ class DetailViewController: UIViewController {
             titleLabel?.text = article.title
             // update detail text
             detailLabel?.text = article.detail
+            contentLabel?.text = article.content
+            publishedDate?.text = article.publishedAt
+            var author:String? = nil
+            if let a = article.author {
+                author = "Author: " + a
+            }
+            authorLabel?.text = author
             // update image
             if let urlToImage = article.urlToImage, let url = URL(string: urlToImage) {
                 imageView?.kf.setImage(with: url){[weak self] result in
