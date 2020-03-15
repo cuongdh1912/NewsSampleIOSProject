@@ -32,6 +32,7 @@ class CustomNewsViewController: NewsViewController {
             }
         }
     }
+    
     // handle refresh control event
     @objc override func handleRefreshControl() {
         guard let currentPreference = currentPreference else { return }
@@ -51,6 +52,8 @@ class CustomNewsViewController: NewsViewController {
         UserDefaultManager.shared.updatePreference(preference: currentPreference)
         customNewsViewModel?.queryToGetCustomNews(keyword: currentPreference)
         showHidePreferenceView(isVisible: false)
+        // bring the preference for registration
+        PreferencesViewModel.selectedPreference = currentPreference
     }
     // hide preferencesView
     @IBAction func cencelButtonClicked(_ sender: Any) {

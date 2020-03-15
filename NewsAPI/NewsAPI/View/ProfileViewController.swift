@@ -21,6 +21,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var submitButton: UIButton?
     @IBOutlet weak var passwordView: UIStackView?
     var registered: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // load profile
@@ -50,6 +51,7 @@ class ProfileViewController: UIViewController {
             addressTextField?.text = ""
             passwordTextField?.text = ""
             UserDefaultManager.shared.removeProfile()
+            PreferencesViewModel.selectedPreference = nil
         }else { // sign in
             if !checkValidation() {
                 return
@@ -58,10 +60,15 @@ class ProfileViewController: UIViewController {
             profile.userName = userNameTextField?.text?.trimmingCharacters(in: .whitespaces)
             profile.name = nameTextField?.text
             profile.address = addressTextField?.text
+            profile.preference = PreferencesViewModel.selectedPreference
             UserDefaultManager.shared.saveProfile(profile: profile)
         }
         registered = !registered
         showHideRegisterFields(isVisible: !registered)
+    }
+    @IBAction func backgroundButtonClicked(_ sender: Any) {
+        // hide keyboard
+        self.view.endEditing(true)
     }
     func isEmpty(text: String?) -> Bool{
         if let userName = text {
