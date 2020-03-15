@@ -18,25 +18,32 @@ class NewsAPIRequest{
     static func createError(_ message: String?)->NSError{
         return NSError(domain:"", code: 401, userInfo:[ NSLocalizedDescriptionKey: message ?? ""])
     }
-    // query to get headlines
-    func getHeadlines() -> Observable<[Article]>{
-        let urlString: String = URLQueryData.rootURL + URLQueryData.headlineExtension
-        // generate dictionary of parameters & values
-        let parameters = [HeadLineParameters.country: HeadLineValues.country, HeadLineParameters.category: HeadLineValues.category, HeadLineParameters.apiKey: HeadLineValues.apiKey]
-        return getNews(urlString: urlString, parameters: parameters)
-    }
+    
     // get news when user select a preference: bitcoin, apple, earthquake, animal
-    func getNewsWithKeyword(keyWord: String)  -> Observable<[Article]> {
-        let urlString: String = URLQueryData.rootURL + URLQueryData.customExtension
-        // generate dictionary of parameters & values
-        var parameters = [NewsWithKeywordParameters.keyWord: keyWord, NewsWithKeywordParameters.sortBy: NewsWithKeywordValues.sortBy, HeadLineParameters.apiKey: HeadLineValues.apiKey]
-        if let from = getLast7Date() {
-            parameters[NewsWithKeywordParameters.from] = from
+    func getNews(keyWord: String?, page: Int)  -> Observable<(Int, [Article])> {
+        var urlString: String = URLQueryData.rootURL
+        let pageString = String(page)
+        var parameters:[String: String] = [:]
+        if let keyWord = keyWord { // query custom news with keyword
+            urlString += URLQueryData.customExtension
+            // generate dictionary of parameters & values
+            parameters = [NewsWithKeywordParameters.keyWord: keyWord, NewsWithKeywordParameters.sortBy: NewsWithKeywordValues.sortBy]
+            if let from = getLast7Date() {
+                parameters[NewsWithKeywordParameters.from] = from
+            }
+        }else { // for headlines
+            urlString += URLQueryData.headlineExtension
+            parameters = [HeadLineParameters.country: HeadLineValues.country, HeadLineParameters.category: HeadLineValues.category]
         }
-        return getNews(urlString: urlString, parameters: parameters)
+         
+        parameters[HeadLineParameters.page] = pageString
+        parameters[HeadLineParameters.apiKey] = HeadLineValues.apiKey
+        
+        
+        return doQuerying(urlString: urlString, parameters: parameters)
     }
     // query api to get all news with urlString & parameters
-    func getNews(urlString: String, parameters: [String: String]) -> Observable<[Article]> {
+    func doQuerying(urlString: String, parameters: [String: String]) -> Observable<(Int, [Article])> {
         // generate "get" url with parameters
         var url = urlString
         for (key, value) in parameters {
@@ -51,13 +58,20 @@ class NewsAPIRequest{
                 .subscribe(onNext: {(r, json) in // if smt responds
                     let message = "Get news failded! Please try again"
                     if let dict = json as? [String: Any] {
-                        if let status = dict[JSONDataKeys.status] as? String, status == "ok"{
-                            if let articles = dict[JSONDataKeys.articles], let newsList = JSONParser.shared.createNewsByJSONArray(objectArray: articles) {
-                                observer.onNext(newsList)
-                            }
-                            else{
-                                let error = NewsAPIRequest.createError(message)
-                                observer.onError(error)
+                        if let status = dict[JSONDataKeys.status] as? String {
+                            if status == "ok"{
+                                if let articles = dict[JSONDataKeys.articles], let newsList = JSONParser.shared.createNewsByJSONArray(objectArray: articles), let totalResults = dict[JSONDataKeys.totalResults] as? Int {
+                                    observer.onNext((totalResults, newsList))
+                                }
+                                else{
+                                    let error = NewsAPIRequest.createError(message)
+                                    observer.onError(error)
+                                }
+                            }else { // get message
+                                if let m = dict[JSONDataKeys.message] as? String {
+                                    let error = NewsAPIRequest.createError(m)
+                                    observer.onError(error)
+                                }
                             }
                         }else{ // not successful show error message
                             let error = NewsAPIRequest.createError(message)

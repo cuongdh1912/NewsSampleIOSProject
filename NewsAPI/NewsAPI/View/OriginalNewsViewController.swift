@@ -5,13 +5,13 @@
 //  Created by Cuong Do Hung on 3/14/20.
 //  Copyright © 2020 Cuong Do Hung. All rights reserved.
 //
-
+/* Display news in webview */
 import UIKit
 import WebKit
 class OriginalNewsViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
-    var urlString: String?
     @IBOutlet var webkit: WKWebView?
+    var urlString: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         // show activity indicator for waiting loading website
@@ -25,6 +25,7 @@ class OriginalNewsViewController: UIViewController {
             hideActivityIndicator()
         }
     }
+    // hide activity indicator
     func hideActivityIndicator(){
         activityIndicator?.stopAnimating()
         activityIndicator?.isHidden = true

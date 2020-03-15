@@ -8,6 +8,8 @@
 
 struct JSONDataKeys{
     static let status = "status"
+    static let message = "message"
+    static let totalResults = "totalResults"
     static let articles = "articles"
     static let title = "title"
     static let detail = "description"

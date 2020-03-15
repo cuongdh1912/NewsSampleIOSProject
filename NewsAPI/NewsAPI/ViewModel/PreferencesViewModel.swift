@@ -5,7 +5,7 @@
 //  Created by Cuong Do Hung on 3/15/20.
 //  Copyright © 2020 Cuong Do Hung. All rights reserved.
 //
-
+/* Get data for preference choice*/
 class PreferencesViewModel {
     static var selectedPreference: String?
     let allPreferences = ["Bitcoin", "Apple", "Earthquake", "Animal"]

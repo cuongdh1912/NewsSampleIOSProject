@@ -12,21 +12,17 @@ class CustomNewsViewController: NewsViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var preferencesViewHeight: NSLayoutConstraint? // = 0 => hide pickerview
     @IBOutlet weak var filterBarButton: UIBarButtonItem!
-    var customNewsViewModel: CustomNewsViewModel? // ViewModel
     lazy var preferencesViewModel: PreferencesViewModel = PreferencesViewModel()
     let preferencesViewMaxHeight:CGFloat = 120.0
-    var currentPreference: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // hide pickerview
         preferencesViewHeight?.constant = 0
-        customNewsViewModel = CustomNewsViewModel(delegate: self)
-        newsModelView = customNewsViewModel
         // get preference if user registered
         if let preference = UserDefaultManager.shared.getPreference() {
-            currentPreference = preference
-            customNewsViewModel?.queryToGetCustomNews(keyword: currentPreference)
+            newsModelView?.updateCurrentPreference(preference: preference)
+            newsModelView?.queryToGetNewsFromBeginning(keyword: preference)
             if let index = preferencesViewModel.getIndex(preference: preference) {
                 pickerView.selectRow(index, inComponent: 0, animated: false)
             }
@@ -35,8 +31,9 @@ class CustomNewsViewController: NewsViewController {
     
     // handle refresh control event
     @objc override func handleRefreshControl() {
-        guard let currentPreference = currentPreference else { return }
-        customNewsViewModel?.queryToGetCustomNews(keyword: currentPreference)
+        super.handleRefreshControl()
+        guard let currentPreference = newsModelView?.currentPreference else { return }
+        newsModelView?.queryToGetNewsFromBeginning(keyword: currentPreference)
         // Dismiss the refresh control.
         DispatchQueue.main.async {[unowned self] in
             self.tableView?.refreshControl?.endRefreshing()
@@ -48,12 +45,13 @@ class CustomNewsViewController: NewsViewController {
     }
     @IBAction func selectButtonClicked(_ sender: Any) {
         let index = pickerView.selectedRow(inComponent: 0)
-        currentPreference = preferencesViewModel.getPreference(index: index)
-        UserDefaultManager.shared.updatePreference(preference: currentPreference)
-        customNewsViewModel?.queryToGetCustomNews(keyword: currentPreference)
+        let preference = preferencesViewModel.getPreference(index: index)
+        newsModelView?.updateCurrentPreference(preference: preference)
+        UserDefaultManager.shared.updatePreference(preference: preference)
+        newsModelView?.queryToGetNewsFromBeginning(keyword: preference)
         showHidePreferenceView(isVisible: false)
         // bring the preference for registration
-        PreferencesViewModel.selectedPreference = currentPreference
+        PreferencesViewModel.selectedPreference = preference
     }
     // hide preferencesView
     @IBAction func cencelButtonClicked(_ sender: Any) {
@@ -91,8 +89,5 @@ extension CustomNewsViewController: UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
         return preferencesViewModel.getPreference(index: row) // the actual string to display for the row "row"
-    }
-    // called when user select a row
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     }
 }

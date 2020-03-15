@@ -20,6 +20,7 @@ struct HeadLineParameters {
     static let country = "country"
     static let category = "category"
     static let apiKey = "apiKey"
+    static let page = "page"
 }
 struct HeadLineValues {
     static let country = "us"

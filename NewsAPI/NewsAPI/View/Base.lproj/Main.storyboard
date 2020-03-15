@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -11,16 +10,19 @@
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController title="Headlines" id="9pv-A4-QxB" customClass="HeadlineViewController" customModule="NewsAPI" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fSd-Me-Fus"/>
+                        <viewControllerLayoutGuide type="bottom" id="HEN-5k-Enu"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cT6-76-EhB">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cT6-76-EhB">
+                                <rect key="frame" x="0.0" y="20" width="414" height="856"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReusedCellId" rowHeight="73" id="Rqs-4Z-JWf" customClass="NewsCell" customModule="NewsAPI" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReusedCellIdNews" rowHeight="73" id="Rqs-4Z-JWf" customClass="NewsCell" customModule="NewsAPI" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rqs-4Z-JWf" translatesAutoresizingMaskIntoConstraints="NO" id="njz-Ya-6AW">
@@ -54,6 +56,31 @@
                                             <outlet property="title" destination="wXx-IL-xUh" id="UVZ-3S-Otg"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReusedCellIdLoad" id="w1y-wb-gWG" customClass="LoadCell" customModule="NewsAPI" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="101" width="414" height="44.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w1y-wb-gWG" id="dNG-Qb-8L5">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtV-jc-Vph">
+                                                    <rect key="frame" x="140" y="7" width="134" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="134" id="BhA-tC-Dxa"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Load more"/>
+                                                    <connections>
+                                                        <action selector="loadButtonClicked:" destination="w1y-wb-gWG" eventType="touchUpInside" id="ixk-A4-9RC"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="xtV-jc-Vph" firstAttribute="centerX" secondItem="dNG-Qb-8L5" secondAttribute="centerX" id="0PJ-Eu-Lnq"/>
+                                                <constraint firstItem="xtV-jc-Vph" firstAttribute="top" secondItem="dNG-Qb-8L5" secondAttribute="topMargin" constant="-4" id="At7-8U-g1d"/>
+                                                <constraint firstItem="xtV-jc-Vph" firstAttribute="centerY" secondItem="dNG-Qb-8L5" secondAttribute="centerY" id="Qah-Gs-G0v"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="9pv-A4-QxB" id="SZm-m4-111"/>
@@ -62,7 +89,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
+                        <constraints>
+                            <constraint firstAttribute="right" secondItem="cT6-76-EhB" secondAttribute="right" id="20R-qp-e9z"/>
+                            <constraint firstAttribute="bottom" secondItem="cT6-76-EhB" secondAttribute="bottom" constant="20" symbolic="YES" id="peI-2f-lCd"/>
+                            <constraint firstItem="cT6-76-EhB" firstAttribute="left" secondItem="tsR-hK-woN" secondAttribute="left" id="pju-hq-whj"/>
+                            <constraint firstItem="cT6-76-EhB" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" constant="20" symbolic="YES" id="uMs-3D-umj"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Headlines" image="first" id="acW-dT-cKf"/>
                     <navigationItem key="navigationItem" title="Headlines" id="HTZ-rZ-zsv"/>
@@ -78,6 +110,10 @@
         <scene sceneID="Gph-iW-cGN">
             <objects>
                 <viewController storyboardIdentifier="DetailViewController" id="1A8-FX-sCs" customClass="DetailViewController" customModule="NewsAPI" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Lsj-xC-dDG"/>
+                        <viewControllerLayoutGuide type="bottom" id="hap-cW-67z"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pwf-WX-ZN7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -145,12 +181,11 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Mol-Om-Pah" firstAttribute="trailing" secondItem="ZHA-aL-XwF" secondAttribute="trailing" id="Arf-Sa-82Z"/>
-                            <constraint firstItem="Mol-Om-Pah" firstAttribute="leading" secondItem="ZHA-aL-XwF" secondAttribute="leading" id="HTI-GG-bxD"/>
-                            <constraint firstItem="Mol-Om-Pah" firstAttribute="top" secondItem="ZHA-aL-XwF" secondAttribute="top" id="KCW-6X-uMv"/>
-                            <constraint firstItem="Mol-Om-Pah" firstAttribute="bottom" secondItem="ZHA-aL-XwF" secondAttribute="bottom" id="TWO-A9-JH9"/>
+                            <constraint firstItem="Mol-Om-Pah" firstAttribute="trailing" secondItem="pwf-WX-ZN7" secondAttribute="trailing" id="Arf-Sa-82Z"/>
+                            <constraint firstItem="Mol-Om-Pah" firstAttribute="leading" secondItem="pwf-WX-ZN7" secondAttribute="leading" id="HTI-GG-bxD"/>
+                            <constraint firstItem="Mol-Om-Pah" firstAttribute="top" secondItem="Lsj-xC-dDG" secondAttribute="bottom" id="KCW-6X-uMv"/>
+                            <constraint firstItem="Mol-Om-Pah" firstAttribute="bottom" secondItem="hap-cW-67z" secondAttribute="top" id="TWO-A9-JH9"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ZHA-aL-XwF"/>
                     </view>
                     <connections>
                         <outlet property="authorLabel" destination="DW8-n8-gqq" id="MP6-Ea-6hb"/>
@@ -187,6 +222,10 @@
         <scene sceneID="Jlp-Il-H9G">
             <objects>
                 <viewController storyboardIdentifier="OriginalNewsViewController" id="7VY-qm-hsY" customClass="OriginalNewsViewController" customModule="NewsAPI" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RnK-vH-cr0"/>
+                        <viewControllerLayoutGuide type="bottom" id="2bS-BD-7jB"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5wM-xK-Fk5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -209,7 +248,6 @@
                             <constraint firstItem="Zie-jc-1mE" firstAttribute="centerX" secondItem="5wM-xK-Fk5" secondAttribute="centerX" id="emB-TZ-JqH"/>
                             <constraint firstItem="Zie-jc-1mE" firstAttribute="centerY" secondItem="5wM-xK-Fk5" secondAttribute="centerY" id="g2r-YV-HOY"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ctF-YA-X4T"/>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="Zie-jc-1mE" id="pU6-GB-OJ7"/>
@@ -237,26 +275,33 @@
             </objects>
             <point key="canvasLocation" x="816" y="21"/>
         </scene>
-        <!--News with preference-->
+        <!--News-->
         <scene sceneID="sdm-dh-CEa">
             <objects>
-                <viewController title="News with preference" id="sDO-vz-e9j" customClass="CustomNewsViewController" customModule="NewsAPI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="News" id="sDO-vz-e9j" customClass="CustomNewsViewController" customModule="NewsAPI" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JDZ-h0-yuc"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bmj-vu-EUv"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MT7-nY-bRi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please touch Filter button to filter news" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvr-J7-yUd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please touch Filter button to filter news" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvr-J7-yUd">
                                 <rect key="frame" x="20" y="200" width="374" height="74"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="3Fp-ff-XJH"/>
+                                    <constraint firstAttribute="width" constant="374" id="vbY-nY-uw1"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TbT-Hc-UfA">
-                                <rect key="frame" x="0.0" y="88" width="414" height="597"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="685"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReusedCellId" rowHeight="73" id="4Jf-1Q-W1q" customClass="NewsCell" customModule="NewsAPI" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReusedCellIdNews" rowHeight="73" id="4Jf-1Q-W1q" customClass="NewsCell" customModule="NewsAPI" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Jf-1Q-W1q" id="an8-iI-mFs">
@@ -291,6 +336,31 @@
                                             <outlet property="title" destination="BJO-9n-sbu" id="i8f-TF-f0y"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReusedCellIdLoad" id="Zoe-Jy-RHq" customClass="LoadCell" customModule="NewsAPI" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="101" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zoe-Jy-RHq" id="V1T-xS-Faf">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uq4-S1-efw">
+                                                    <rect key="frame" x="140" y="7" width="134" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="134" id="EOa-6d-HNe"/>
+                                                        <constraint firstAttribute="height" constant="30" id="LpS-qJ-njU"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Load more"/>
+                                                    <connections>
+                                                        <action selector="loadButtonClicked:" destination="Zoe-Jy-RHq" eventType="touchUpInside" id="KOF-gG-UIa"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Uq4-S1-efw" firstAttribute="centerY" secondItem="V1T-xS-Faf" secondAttribute="centerY" id="45k-o8-8vP"/>
+                                                <constraint firstItem="Uq4-S1-efw" firstAttribute="centerX" secondItem="V1T-xS-Faf" secondAttribute="centerX" id="VlR-Ge-Otb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="sDO-vz-e9j" id="PKM-au-oys"/>
@@ -300,30 +370,37 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQA-8R-hmz">
                                 <rect key="frame" x="0.0" y="693" width="414" height="120"/>
                                 <subviews>
-                                    <view alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E0U-gr-r9E">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E0U-gr-r9E">
+                                        <rect key="frame" x="20" y="0.0" width="374" height="1"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="3Nd-n0-WEl"/>
+                                        </constraints>
                                     </view>
-                                    <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="akn-5B-SNT">
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="akn-5B-SNT">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <connections>
                                             <outlet property="dataSource" destination="sDO-vz-e9j" id="4Le-Nw-dvf"/>
                                             <outlet property="delegate" destination="sDO-vz-e9j" id="aLs-Md-KdP"/>
                                         </connections>
                                     </pickerView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0eO-H4-tex">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0eO-H4-tex">
                                         <rect key="frame" x="327" y="7" width="74" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="VGb-NV-5Pf"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="74" id="wQW-A4-cRP"/>
+                                        </constraints>
                                         <state key="normal" title="Select"/>
                                         <connections>
                                             <action selector="selectButtonClicked:" destination="sDO-vz-e9j" eventType="touchUpInside" id="bR5-K9-60j"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vq1-lH-EdD">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vq1-lH-EdD">
                                         <rect key="frame" x="12" y="7" width="74" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="C2h-SN-9a1"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="74" id="tCS-Gq-fFT"/>
+                                        </constraints>
                                         <state key="normal" title="Cancel"/>
                                         <connections>
                                             <action selector="cencelButtonClicked:" destination="sDO-vz-e9j" eventType="touchUpInside" id="eO3-eq-PKg"/>
@@ -332,21 +409,36 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstItem="akn-5B-SNT" firstAttribute="leading" secondItem="EQA-8R-hmz" secondAttribute="leading" id="2yj-Ni-2Ai"/>
+                                    <constraint firstAttribute="height" secondItem="akn-5B-SNT" secondAttribute="height" id="3WV-R7-cmz"/>
+                                    <constraint firstItem="vq1-lH-EdD" firstAttribute="leading" secondItem="EQA-8R-hmz" secondAttribute="leading" constant="12" id="3X7-NV-Q0A"/>
+                                    <constraint firstItem="akn-5B-SNT" firstAttribute="centerX" secondItem="EQA-8R-hmz" secondAttribute="centerX" id="6eD-es-rFK"/>
+                                    <constraint firstAttribute="trailing" secondItem="E0U-gr-r9E" secondAttribute="trailing" constant="20" symbolic="YES" id="QUr-Ig-vhF"/>
+                                    <constraint firstAttribute="trailing" secondItem="0eO-H4-tex" secondAttribute="trailing" constant="13" id="RWW-HJ-O7f"/>
+                                    <constraint firstItem="E0U-gr-r9E" firstAttribute="leading" secondItem="EQA-8R-hmz" secondAttribute="leading" constant="20" symbolic="YES" id="TeA-9I-N2a"/>
+                                    <constraint firstItem="0eO-H4-tex" firstAttribute="top" secondItem="E0U-gr-r9E" secondAttribute="bottom" constant="6" id="Tmg-E7-71x"/>
+                                    <constraint firstItem="0eO-H4-tex" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vq1-lH-EdD" secondAttribute="trailing" constant="8" symbolic="YES" id="U5b-50-Ypq"/>
+                                    <constraint firstItem="E0U-gr-r9E" firstAttribute="top" secondItem="EQA-8R-hmz" secondAttribute="top" id="We1-7q-UeJ"/>
                                     <constraint firstAttribute="height" constant="120" id="f7E-gr-cDt"/>
+                                    <constraint firstItem="akn-5B-SNT" firstAttribute="centerY" secondItem="EQA-8R-hmz" secondAttribute="centerY" id="q6z-e1-3V8"/>
+                                    <constraint firstAttribute="trailing" secondItem="akn-5B-SNT" secondAttribute="trailing" id="v4O-gA-LcT"/>
+                                    <constraint firstItem="vq1-lH-EdD" firstAttribute="top" secondItem="E0U-gr-r9E" secondAttribute="bottom" constant="6" id="yrP-MB-AQM"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="EQA-8R-hmz" firstAttribute="leading" secondItem="CEW-2g-wtr" secondAttribute="leading" id="3lC-t0-J7b"/>
-                            <constraint firstItem="TbT-Hc-UfA" firstAttribute="leading" secondItem="CEW-2g-wtr" secondAttribute="leading" id="92S-6x-7YW"/>
-                            <constraint firstItem="TbT-Hc-UfA" firstAttribute="top" secondItem="CEW-2g-wtr" secondAttribute="top" id="RkK-JP-tDK"/>
-                            <constraint firstItem="EQA-8R-hmz" firstAttribute="bottom" secondItem="CEW-2g-wtr" secondAttribute="bottom" id="Uqx-WR-f2m"/>
+                            <constraint firstItem="EQA-8R-hmz" firstAttribute="leading" secondItem="MT7-nY-bRi" secondAttribute="leading" id="3lC-t0-J7b"/>
+                            <constraint firstItem="wvr-J7-yUd" firstAttribute="leading" secondItem="MT7-nY-bRi" secondAttribute="leadingMargin" id="4Zd-I2-gDJ"/>
+                            <constraint firstItem="wvr-J7-yUd" firstAttribute="top" secondItem="JDZ-h0-yuc" secondAttribute="bottom" constant="112" id="7Ez-ap-jtl"/>
+                            <constraint firstItem="TbT-Hc-UfA" firstAttribute="leading" secondItem="MT7-nY-bRi" secondAttribute="leading" id="92S-6x-7YW"/>
+                            <constraint firstItem="wvr-J7-yUd" firstAttribute="trailing" secondItem="MT7-nY-bRi" secondAttribute="trailingMargin" id="G6O-8s-g7b"/>
+                            <constraint firstItem="TbT-Hc-UfA" firstAttribute="top" secondItem="MT7-nY-bRi" secondAttribute="top" id="RkK-JP-tDK"/>
+                            <constraint firstItem="EQA-8R-hmz" firstAttribute="bottom" secondItem="Bmj-vu-EUv" secondAttribute="top" id="Uqx-WR-f2m"/>
                             <constraint firstItem="EQA-8R-hmz" firstAttribute="top" secondItem="TbT-Hc-UfA" secondAttribute="bottom" constant="8" symbolic="YES" id="WZx-rJ-D9p"/>
-                            <constraint firstItem="EQA-8R-hmz" firstAttribute="trailing" secondItem="CEW-2g-wtr" secondAttribute="trailing" id="gF3-dc-HlJ"/>
-                            <constraint firstItem="TbT-Hc-UfA" firstAttribute="trailing" secondItem="CEW-2g-wtr" secondAttribute="trailing" id="jxK-ua-iBu"/>
+                            <constraint firstItem="EQA-8R-hmz" firstAttribute="trailing" secondItem="MT7-nY-bRi" secondAttribute="trailing" id="gF3-dc-HlJ"/>
+                            <constraint firstItem="TbT-Hc-UfA" firstAttribute="trailing" secondItem="MT7-nY-bRi" secondAttribute="trailing" id="jxK-ua-iBu"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="CEW-2g-wtr"/>
                     </view>
                     <navigationItem key="navigationItem" title="News" id="eVo-2c-Pua">
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="B09-AQ-kBf">
@@ -389,6 +481,10 @@
         <scene sceneID="iax-OT-zNt">
             <objects>
                 <viewController title="Profile" id="WrX-eG-TVA" customClass="ProfileViewController" customModule="NewsAPI" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fmg-dO-iWt"/>
+                        <viewControllerLayoutGuide type="bottom" id="XRB-l5-gwg"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7Ot-MY-ZqQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -526,9 +622,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="GaZ-bZ-cE0" firstAttribute="centerX" secondItem="7Ot-MY-ZqQ" secondAttribute="centerX" id="KhV-3r-CaO"/>
-                            <constraint firstItem="GaZ-bZ-cE0" firstAttribute="top" secondItem="btK-qp-lRy" secondAttribute="top" constant="17" id="zWk-r1-Gqx"/>
+                            <constraint firstItem="GaZ-bZ-cE0" firstAttribute="top" secondItem="fmg-dO-iWt" secondAttribute="bottom" constant="17" id="zWk-r1-Gqx"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="btK-qp-lRy"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="profile" id="nR6-nd-bF8"/>
                     <connections>
