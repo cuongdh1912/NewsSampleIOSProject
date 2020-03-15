@@ -7,7 +7,7 @@
 //
 
 class PreferencesViewModel {
-    let allPreferences = ["bitcoin", "apple", "earthquake", "animal"]
+    let allPreferences = ["Bitcoin", "Apple", "Earthquake", "Animal"]
     func getTotalPreferences() -> Int {
         return allPreferences.count
     }

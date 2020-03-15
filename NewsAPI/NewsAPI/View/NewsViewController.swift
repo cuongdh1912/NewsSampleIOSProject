@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class NewsViewController: UIViewController {
+class NewsViewController: UIViewController, NewsAPIRequestDelegate {
     @IBOutlet weak var tableView: UITableView?
     var newsModelView: NewsViewModel?
     var reusedTableViewCellId = "ReusedCellId"
@@ -26,9 +26,7 @@ class NewsViewController: UIViewController {
     @objc func handleRefreshControl() {
        
     }
-}
-// implement NewsAPIRequestDelegate method to reload tableview
-extension NewsViewController: NewsAPIRequestDelegate {
+    // implement NewsAPIRequestDelegate method to reload tableview
     func newsAPIRequestSuccess() {
         // refresh table view
         tableView?.reloadData()

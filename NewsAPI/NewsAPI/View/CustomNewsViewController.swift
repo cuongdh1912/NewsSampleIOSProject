@@ -11,7 +11,7 @@ import UIKit
 class CustomNewsViewController: NewsViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var preferencesViewHeight: NSLayoutConstraint? // = 0 => hide pickerview
-    @IBOutlet weak var preferencesBarButton: UIBarButtonItem!
+    @IBOutlet weak var filterBarButton: UIBarButtonItem!
     var customNewsViewModel: CustomNewsViewModel? // ViewModel
     lazy var preferencesViewModel: PreferencesViewModel = PreferencesViewModel()
     let preferencesViewMaxHeight:CGFloat = 120.0
@@ -42,7 +42,7 @@ class CustomNewsViewController: NewsViewController {
         }
     }
     // when user click right bar button, show picker view
-    @IBAction func preferencesBarClicked(_ sender: Any) {
+    @IBAction func filterBarClicked(_ sender: Any) {
         showHidePreferenceView(isVisible: true)
     }
     @IBAction func selectButtonClicked(_ sender: Any) {
@@ -63,6 +63,13 @@ class CustomNewsViewController: NewsViewController {
         }else {
             navigationItem.rightBarButtonItem?.isEnabled = true
             preferencesViewHeight?.constant = 0
+        }
+    }
+    override func newsAPIRequestSuccess() {
+        super.newsAPIRequestSuccess()
+        // show table view when we recieve data for the first time
+        if let tableView = tableView, tableView.isHidden {
+            tableView.isHidden = false
         }
     }
 }

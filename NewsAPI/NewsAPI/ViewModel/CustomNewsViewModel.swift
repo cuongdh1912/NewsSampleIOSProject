@@ -6,7 +6,7 @@
 //  Copyright © 2020 Cuong Do Hung. All rights reserved.
 //
 import Foundation
-class CustomNewsViewModel: NewsViewModel {
+class CustomNewsViewModel: NewsViewModel {    
     func queryToGetCustomNews(keyword: String?) {
         guard let keyword = keyword else { return}
         // query api request in other thread
