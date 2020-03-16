@@ -16,10 +16,6 @@ class HeadlineViewController: NewsViewController {
     // handle refresh control event
     @objc override func handleRefreshControl() {
         super.handleRefreshControl()
-        newsModelView?.queryToGetNewsFromBeginning(keyword: nil)
-        // Dismiss the refresh control.
-        DispatchQueue.main.async {[unowned self] in
-            self.tableView?.refreshControl?.endRefreshing()
-        }
+        newsModelView?.queryToGetNewsFromBeginning(keyword: nil)        
     }
 }

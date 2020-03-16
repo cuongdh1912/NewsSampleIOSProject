@@ -64,7 +64,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtV-jc-Vph">
-                                                    <rect key="frame" x="140" y="7" width="134" height="30"/>
+                                                    <rect key="frame" x="140" y="7" width="134" height="30.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="134" id="BhA-tC-Dxa"/>
                                                     </constraints>
@@ -87,10 +87,15 @@
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="Fnd-HO-1H1"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="EhV-nZ-8Ri">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="right" secondItem="cT6-76-EhB" secondAttribute="right" id="20R-qp-e9z"/>
+                            <constraint firstItem="EhV-nZ-8Ri" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="Dkx-rD-vRB"/>
+                            <constraint firstItem="EhV-nZ-8Ri" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="aiZ-9D-Deg"/>
                             <constraint firstAttribute="bottom" secondItem="cT6-76-EhB" secondAttribute="bottom" constant="20" symbolic="YES" id="peI-2f-lCd"/>
                             <constraint firstItem="cT6-76-EhB" firstAttribute="left" secondItem="tsR-hK-woN" secondAttribute="left" id="pju-hq-whj"/>
                             <constraint firstItem="cT6-76-EhB" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" constant="20" symbolic="YES" id="uMs-3D-umj"/>
@@ -99,6 +104,7 @@
                     <tabBarItem key="tabBarItem" title="Headlines" image="first" id="acW-dT-cKf"/>
                     <navigationItem key="navigationItem" title="Headlines" id="HTZ-rZ-zsv"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="EhV-nZ-8Ri" id="qFh-gz-3nu"/>
                         <outlet property="tableView" destination="cT6-76-EhB" id="uTK-P1-xvE"/>
                     </connections>
                 </viewController>
@@ -367,6 +373,9 @@
                                     <outlet property="delegate" destination="sDO-vz-e9j" id="SJj-m6-RTf"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="UTg-oS-SMc">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQA-8R-hmz">
                                 <rect key="frame" x="0.0" y="693" width="414" height="120"/>
                                 <subviews>
@@ -433,11 +442,13 @@
                             <constraint firstItem="wvr-J7-yUd" firstAttribute="top" secondItem="JDZ-h0-yuc" secondAttribute="bottom" constant="112" id="7Ez-ap-jtl"/>
                             <constraint firstItem="TbT-Hc-UfA" firstAttribute="leading" secondItem="MT7-nY-bRi" secondAttribute="leading" id="92S-6x-7YW"/>
                             <constraint firstItem="wvr-J7-yUd" firstAttribute="trailing" secondItem="MT7-nY-bRi" secondAttribute="trailingMargin" id="G6O-8s-g7b"/>
+                            <constraint firstItem="UTg-oS-SMc" firstAttribute="centerY" secondItem="MT7-nY-bRi" secondAttribute="centerY" id="KQ2-L1-h7b"/>
                             <constraint firstItem="TbT-Hc-UfA" firstAttribute="top" secondItem="MT7-nY-bRi" secondAttribute="top" id="RkK-JP-tDK"/>
                             <constraint firstItem="EQA-8R-hmz" firstAttribute="bottom" secondItem="Bmj-vu-EUv" secondAttribute="top" id="Uqx-WR-f2m"/>
                             <constraint firstItem="EQA-8R-hmz" firstAttribute="top" secondItem="TbT-Hc-UfA" secondAttribute="bottom" constant="8" symbolic="YES" id="WZx-rJ-D9p"/>
                             <constraint firstItem="EQA-8R-hmz" firstAttribute="trailing" secondItem="MT7-nY-bRi" secondAttribute="trailing" id="gF3-dc-HlJ"/>
                             <constraint firstItem="TbT-Hc-UfA" firstAttribute="trailing" secondItem="MT7-nY-bRi" secondAttribute="trailing" id="jxK-ua-iBu"/>
+                            <constraint firstItem="UTg-oS-SMc" firstAttribute="centerX" secondItem="MT7-nY-bRi" secondAttribute="centerX" id="oQ4-xE-47w"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="News" id="eVo-2c-Pua">
@@ -448,6 +459,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="UTg-oS-SMc" id="JbN-4L-wUS"/>
                         <outlet property="filterBarButton" destination="B09-AQ-kBf" id="uMm-S3-PeT"/>
                         <outlet property="pickerView" destination="akn-5B-SNT" id="suM-x9-4i6"/>
                         <outlet property="preferencesViewHeight" destination="f7E-gr-cDt" id="1eN-8e-p3y"/>

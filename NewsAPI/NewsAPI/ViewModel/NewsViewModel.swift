@@ -8,14 +8,16 @@
 
 /* The base class for HeadlineViewModel & CustomNewsViewModel*/
 
-import RxSwift
 import Foundation
+import RxSwift
+import RxCocoa
 class NewsViewModel {
     weak var newsAPIRequestdelegate: NewsAPIRequestDelegate?
     let disposeBag = DisposeBag() // hold RxSwift threads
+    var isQueryingFirstPage: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var loadedPage: Int = 0
     var articles: [Article]?
     var currentPreference: String?
-    var loadedPage: Int = 0
     var loadingCompleted = false
     
     init(delegate: NewsAPIRequestDelegate){
@@ -28,7 +30,7 @@ class NewsViewModel {
     // calculate the total number of table view's rows
     func getNumberOfRow() -> Int {
         if let count = articles?.count {
-            if loadingCompleted { // there is no more news
+            if loadingCompleted || count == 0{ // there is no more news
                 return count
             }else {
                 return count + 1 // show "Load more" row
@@ -44,6 +46,7 @@ class NewsViewModel {
     func queryToGetNewsFromBeginning(keyword: String?) {
         loadingCompleted = false
         articles = []
+        isQueryingFirstPage.accept(true)
         queryToGetNews(keyword: keyword)
     }
     // call api request to get news with keyword
@@ -76,6 +79,7 @@ class NewsViewModel {
                     default:
                         break
                     }
+                    self?.isQueryingFirstPage.accept(false)
                 })
                 .disposed(by: self.disposeBag)
         }

@@ -7,9 +7,13 @@
 //
 /* The base class for HeadlineVC & CustomeNewsVC */
 import UIKit
+import RxSwift
+import RxCocoa
 class NewsViewController: UIViewController, NewsAPIRequestDelegate {
     @IBOutlet weak var tableView: UITableView?
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView?
     var newsModelView: NewsViewModel?
+    private let disposeBag = DisposeBag() // used to release dispose in RxSwift
     var reusedTableViewCellIdNews = "ReusedCellIdNews"
     var reusedTableViewCellIdLoad = "ReusedCellIdLoad"
     
@@ -18,6 +22,8 @@ class NewsViewController: UIViewController, NewsAPIRequestDelegate {
         newsModelView = NewsViewModel(delegate: self)
         // add pull refresh to table view
         configureRefreshControl()
+        // integrate with rxswift
+        configureRxSwift(with: newsModelView)
     }
     func configureRefreshControl () {
        // Add the refresh control to your UIScrollView object.
@@ -26,9 +32,30 @@ class NewsViewController: UIViewController, NewsAPIRequestDelegate {
                                           #selector(handleRefreshControl),
                                           for: .valueChanged)
     }
+    // MARK: - config the rxswift with controllers
+    func configureRxSwift(with newsViewModel: NewsViewModel?) {
+        guard let viewModel = newsViewModel else {return}
+        let queryingFirstPageObserver = BehaviorRelay<NewsViewModel>(value: viewModel)
+        queryingFirstPageObserver.value.isQueryingFirstPage.asObservable()
+            .subscribe(onNext: {[weak self] querying in
+                // show/hide activity indicator, table view
+                self?.activityIndicatorView?.isHidden = !querying
+                // start animation
+                if querying {
+                    self?.activityIndicatorView?.startAnimating()
+                }else { // stop animation
+                    self?.activityIndicatorView?.stopAnimating()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
     // triggered when pull & refresh
     @objc func handleRefreshControl() {
         newsModelView?.loadedPage = 0
+        // Dismiss the refresh control.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {[unowned self] in
+            self.tableView?.refreshControl?.endRefreshing()
+        }
     }
     // implement NewsAPIRequestDelegate method to reload tableview
     func newsAPIRequestSuccess() {
@@ -42,7 +69,7 @@ class NewsViewController: UIViewController, NewsAPIRequestDelegate {
         RouteManager.showAlert(message: error.localizedDescription, parrent: self)
     }
 }
-// implement tableview delegate, datasource
+// MARK: --implement tableview delegate, datasource
 extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     // total number of row
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

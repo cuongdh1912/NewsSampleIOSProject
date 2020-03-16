@@ -33,11 +33,7 @@ class CustomNewsViewController: NewsViewController {
     @objc override func handleRefreshControl() {
         super.handleRefreshControl()
         guard let currentPreference = newsModelView?.currentPreference else { return }
-        newsModelView?.queryToGetNewsFromBeginning(keyword: currentPreference)
-        // Dismiss the refresh control.
-        DispatchQueue.main.async {[unowned self] in
-            self.tableView?.refreshControl?.endRefreshing()
-        }
+        newsModelView?.queryToGetNewsFromBeginning(keyword: currentPreference)        
     }
     // when user click right bar button, show picker view
     @IBAction func filterBarClicked(_ sender: Any) {
